@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { ArrowRight, Github, Instagram, Mail, Phone } from 'lucide-react';
 import { ImageWithFallback } from './ui/ImageWithFallback';
 import Link from 'next/link';
 
@@ -11,10 +11,30 @@ interface HeroSectionProps {
 
 export function HeroSection({ isDarkMode }: HeroSectionProps) {
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-gray-400' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-400' },
-    { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:text-sky-400' },
-    { icon: Mail, href: '#', label: 'Email', color: 'hover:text-red-400' },
+    { 
+      icon: Github, 
+      href: 'https://github.com/mdprsty16', 
+      label: 'GitHub', 
+      color: 'hover:text-gray-400' 
+    },
+    { 
+      icon: Instagram, 
+      href: 'https://instagram.com/mdprsty16_', 
+      label: 'Instagram', 
+      color: 'hover:text-pink-500' 
+    },
+    { 
+      icon: Phone, 
+      href: 'https://wa.me/6289662990536', 
+      label: 'WhatsApp', 
+      color: 'hover:text-green-500' 
+    },
+    { 
+      icon: Mail, 
+      href: 'mailto:prasetyodeko240@gmail.com', 
+      label: 'Email', 
+      color: 'hover:text-red-400' 
+    },
   ];
 
   return (
@@ -58,7 +78,6 @@ export function HeroSection({ isDarkMode }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                // UBAH BAGIAN INI: Perbesar ukuran text-4xl jadi 5xl, dan 6xl jadi 7xl/8xl
                 className={`text-5xl md:text-7xl lg:text-8xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
               >
                 Hi, I'm <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Deco Prasetyo</span>
@@ -68,7 +87,6 @@ export function HeroSection({ isDarkMode }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                // UBAH BAGIAN INI: Perbesar text-xl jadi text-2xl/3xl
                 className={`text-2xl md:text-3xl font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
               >
                 Frontend Developer / Web Designer
@@ -78,7 +96,6 @@ export function HeroSection({ isDarkMode }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                // UBAH BAGIAN INI: Perbesar text-lg jadi text-xl dan max-width diperlebar
                 className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} max-w-2xl text-lg md:text-xl leading-relaxed`}
               >
                 Passionate about creating beautiful, functional, and user-friendly websites. 
@@ -109,34 +126,32 @@ export function HeroSection({ isDarkMode }: HeroSectionProps) {
               </Link>
             </motion.div>
 
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="flex gap-4 pt-4"
-            >
+            {/* Social Links (Fixed Animation) */}
+            <div className="flex gap-4 pt-4">
               {socialLinks.map((social, index) => (
-                <motion.a
+                <motion.div
                   key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`p-3 rounded-lg ${
-                    isDarkMode 
-                      ? 'bg-slate-800/50 text-gray-400' 
-                      : 'bg-gray-100 text-gray-600'
-                  } transition-all ${social.color}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 + index * 0.1 }}
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.95 }}
                 >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
+                  <motion.a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block p-3 rounded-lg ${
+                      isDarkMode 
+                        ? 'bg-slate-800/50 text-gray-400' 
+                        : 'bg-gray-100 text-gray-600'
+                    } transition-colors ${social.color}`}
+                    whileHover={{ y: -5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </motion.a>
+                </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Content - Image */}
@@ -158,10 +173,9 @@ export function HeroSection({ isDarkMode }: HeroSectionProps) {
                   ? 'bg-slate-800/50 border-slate-700' 
                   : 'bg-white/50 border-gray-200'
               } border backdrop-blur-xl rounded-3xl p-4 shadow-2xl`}>
-                {/* UBAH BAGIAN INI: h-[400px] diubah menjadi lebih besar di layar LG (lg:h-[550px]) */}
                 <div className="aspect-square rounded-2xl overflow-hidden relative h-[400px] lg:h-[550px] w-full">
                   <ImageWithFallback
-                    src="chisa.jpg" // Pastikan ini mengarah ke fotomu
+                    src="chisa.jpg"
                     alt="Foto Profil"
                     className="object-cover w-full h-full"
                   />
